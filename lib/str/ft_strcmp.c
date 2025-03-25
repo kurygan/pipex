@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 04:09:44 by tylerlover9       #+#    #+#             */
-/*   Updated: 2025/03/25 00:50:45 by mkettab          ###   ########.fr       */
+/*   Created: 2025/03/25 00:56:31 by mkettab           #+#    #+#             */
+/*   Updated: 2025/03/25 20:00:58 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../lib/libft.h"
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
 
-void	parent(char **av, int fd_pid[2], char **env);
-void	kid(char **av, int fd_pid[2], char **env);
-char	*set_path(char *command, char **env);
-
-#endif
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}

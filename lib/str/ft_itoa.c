@@ -3,30 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
+/*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:14:21 by mkettab           #+#    #+#             */
-/*   Updated: 2025/03/20 01:13:43 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/03/25 01:14:27 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 #include <stdio.h>
-
-static int	ft_intlen(int n)
-{
-	int	len;
-
-	len = 0;
-	if (n <= 0)
-		len = 1;
-	while (n != 0)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
 
 static char	*ft_assign(int n, int len, int limits, char *dest)
 {

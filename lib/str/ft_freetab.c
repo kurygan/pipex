@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_freetab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 04:09:44 by tylerlover9       #+#    #+#             */
-/*   Updated: 2025/03/25 00:50:45 by mkettab          ###   ########.fr       */
+/*   Created: 2025/03/25 01:02:54 by mkettab           #+#    #+#             */
+/*   Updated: 2025/03/25 20:00:33 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../libft.h"
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../lib/libft.h"
+void	ft_freetab(char **str)
+{
+	int	i;
 
-void	parent(char **av, int fd_pid[2], char **env);
-void	kid(char **av, int fd_pid[2], char **env);
-char	*set_path(char *command, char **env);
-
-#endif
+	if (!str || !(*str))
+		return ;
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}

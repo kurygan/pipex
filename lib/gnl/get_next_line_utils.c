@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
+/*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:24:41 by mkettab           #+#    #+#             */
-/*   Updated: 2025/03/21 00:53:01 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/03/25 20:00:49 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 t_list	*ft_getlast(t_list *list)
 {
-	t_list *last;
+	t_list	*last;
 
 	last = list;
-	while(last && last->next)
+	while (last && last->next)
 		last = last->next;
 	return (last);
 }
+
 int	ft_foundline(t_list *list)
 {
-	t_list *current;
-	int	i;
+	t_list	*current;
+	int		i;
 
 	if (!list)
 		return (1);
@@ -69,7 +70,7 @@ void	lst_free(t_list *lst)
 	t_list	*next;
 
 	curr = lst;
-	while(curr)
+	while (curr)
 	{
 		free(curr->content);
 		next = curr->next;

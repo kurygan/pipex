@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
+/*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:24:39 by mkettab           #+#    #+#             */
-/*   Updated: 2025/03/21 00:51:28 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/03/25 20:00:21 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static t_list *buf = NULL;
-	char *fin_line;
-	int error;
+	static t_list	*buf;
+	char			*fin_line;
+	int				error;
 
+	buf = NULL;
 	fin_line = NULL;
 	error = read_and_stock(&buf, fd);
 	if (0 == error)
@@ -36,10 +37,10 @@ char *get_next_line(int fd)
 	return (fin_line);
 }
 
-int read_and_stock(t_list **buf, int fd)
+int	read_and_stock(t_list **buf, int fd)
 {
-	char *str;
-	int readed;
+	char	*str;
+	int		readed;
 
 	readed = 1;
 	while (ft_foundline(*buf) && readed > 0)
@@ -59,19 +60,19 @@ int read_and_stock(t_list **buf, int fd)
 	return (1);
 }
 
-void stock_add(char *str, t_list **buf, int readed)
+void	stock_add(char *str, t_list **buf, int readed)
 {
-	int i;
-	t_list *last;
-	t_list *new;
+	int		i;
+	t_list	*last;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return;
+		return ;
 	new->next = NULL;
 	new->content = malloc(sizeof(char) * (readed + 1));
 	if (new->content == NULL)
-		return;
+		return ;
 	i = 0;
 	while (str[i] && i < readed)
 	{
@@ -82,22 +83,22 @@ void stock_add(char *str, t_list **buf, int readed)
 	if (!*buf)
 	{
 		*buf = new;
-		return;
+		return ;
 	}
 	last = ft_getlast(*buf);
 	last->next = new;
 }
 
-void get_line_appart(t_list *buf, char **str)
+void	get_line_appart(t_list *buf, char **str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (!buf)
-		return;
+		return ;
 	line_gen(str, buf);
 	if (!(*str))
-		return;
+		return ;
 	j = 0;
 	while (buf)
 	{
@@ -107,7 +108,7 @@ void get_line_appart(t_list *buf, char **str)
 			if (buf->content[i] == '\n')
 			{
 				(*str)[j++] = buf->content[i];
-				break;
+				break ;
 			}
 			(*str)[j++] = buf->content[i++];
 		}
@@ -116,16 +117,16 @@ void get_line_appart(t_list *buf, char **str)
 	(*str)[j] = 0;
 }
 
-void lst_clean(t_list **buf)
+void	lst_clean(t_list **buf)
 {
-	t_list *get_last;
-	t_list *clean_node;
-	int i;
-	int j;
+	t_list	*get_last;
+	t_list	*clean_node;
+	int		i;
+	int		j;
 
 	clean_node = malloc(sizeof(t_list));
 	if (!buf || !clean_node)
-		return;
+		return ;
 	clean_node->next = NULL;
 	get_last = ft_getlast(*buf);
 	i = 0;
@@ -133,9 +134,10 @@ void lst_clean(t_list **buf)
 		i++;
 	if (get_last->content && get_last->content[i] == '\n')
 		i++;
-	clean_node->content = malloc(sizeof(char) * ((ft_strlen(get_last->content) - i) + 1));
+	clean_node->content = malloc(sizeof(char) * ((ft_strlen(get_last->content)
+					- i) + 1));
 	if (!(clean_node->content))
-		return;
+		return ;
 	j = 0;
 	while (get_last->content[i])
 		clean_node->content[j++] = get_last->content[i++];

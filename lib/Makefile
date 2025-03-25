@@ -21,6 +21,8 @@ SRCS = str/ft_strnstr.c \
 	   str/ft_split.c \
 	   str/ft_strmapi.c \
 	   str/ft_striteri.c \
+	   str/ft_freetab.c \
+	   str/ft_strcmp.c \
 	   num/ft_atoi.c \
 	   is/ft_isascii.c \
 	   is/ft_isprint.c \

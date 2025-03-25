@@ -1,7 +1,7 @@
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3
 
-SRCS = pipex.c \
+SRCS = pipex.c get_path.c\
 
 OBJS = $(SRCS:.c=.o)
 SRCS_DIR = src/
@@ -24,10 +24,12 @@ $(NAME): $(OBJS_PREF)
 all: $(NAME)
 
 clean:
+	@make clean -C lib
 	@rm -rf $(OBJS_DIR)
 	@echo "|🗑️| Removing objects.."
 
 fclean: clean 
+	@make fclean -C lib
 	@rm -f $(NAME)
 	@echo "|🧹| Cleaning.."
 
