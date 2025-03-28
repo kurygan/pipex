@@ -6,13 +6,13 @@
 /*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:00:02 by tylerlover9       #+#    #+#             */
-/*   Updated: 2025/03/28 23:03:09 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/03/28 23:06:58 by tylerlover9      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	exec(char *command, char **env)
+void	exec(char *command, char **env, int fd_pid[2])
 {
 	char	*path;
 	char	**cmd_split;
@@ -25,6 +25,8 @@ void	exec(char *command, char **env)
 		ft_putendl_fd(command, 2);
 		free(path);
 		ft_freetab(cmd_split);
+		close(fd_pid[0]);
+		close(fd_pid[1]);
 		exit(127);
 	}
 }
