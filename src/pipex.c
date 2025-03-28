@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
+/*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 02:00:02 by tylerlover9       #+#    #+#             */
-/*   Updated: 2025/03/28 23:06:58 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/03/28 23:46:58 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	exec(char *command, char **env, int fd_pid[2])
+void	exec(char *command, char **env)
 {
 	char	*path;
 	char	**cmd_split;
@@ -25,8 +25,6 @@ void	exec(char *command, char **env, int fd_pid[2])
 		ft_putendl_fd(command, 2);
 		free(path);
 		ft_freetab(cmd_split);
-		close(fd_pid[0]);
-		close(fd_pid[1]);
 		exit(127);
 	}
 }
@@ -36,11 +34,11 @@ void	parent(char **av, int fd_pid[2], char **env)
 	int	fd;
 
 	fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd < 0)
-		exit(1);
 	dup2(fd, 1);
 	dup2(fd_pid[0], 0);
 	close(fd_pid[1]);
+	close(fd_pid[0]);
+	close(fd);
 	exec(av[3], env);
 }
 
@@ -58,6 +56,8 @@ void	kid(char **av, int fd_pid[2], char **env)
 	dup2(fd, 0);
 	dup2(fd_pid[1], 1);
 	close(fd_pid[0]);
+	close(fd_pid[1]);
+	close(fd);
 	exec(av[2], env);
 }
 
