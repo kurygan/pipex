@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 00:42:25 by mkettab           #+#    #+#             */
-/*   Updated: 2025/03/25 20:00:36 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/04/04 02:01:07 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,19 @@ char	*set_path(char *command, char **env)
 	int		i;
 	char	*exec;
 	char	*path;
+	char	*env_got;
 	char	**allpath;
 
-	i = 0;
+	i = -1;
 	if (!command || !command[0])
 		return (ft_strdup(""));
 	if (command[0] == '/' && !access(command, F_OK | X_OK))
 		return (ft_strdup(command));
-	allpath = ft_split(get_env(env), ':');
-	while (allpath[i])
+	env_got = get_env(env);
+	if (!env_got)
+		return (ft_strdup(command));
+	allpath = ft_split(env_got, ':');
+	while (allpath[i++])
 	{
 		path = ft_strjoin(allpath[i], "/");
 		exec = ft_strjoin(path, command);
@@ -56,7 +60,6 @@ char	*set_path(char *command, char **env)
 		if (access(exec, F_OK | X_OK) == 0)
 			return (ft_freetab(allpath), exec);
 		free(exec);
-		i++;
 	}
 	return (ft_freetab(allpath), ft_strdup(command));
 }
